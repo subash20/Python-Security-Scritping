@@ -14,8 +14,19 @@ tcp=pkt[0][34:54]
 
 print 'Ethernet Packet Analysis !!!!!'
 ethr=struct.unpack('!6s6s2s',etherHdr)
-print 'Destination MAC address:',binascii.hexlify(ethr[0])
-print 'Source MAC address:',binascii.hexlify(ethr[1])
+DMAC=''
+SMAC=''
+for i in range (0,12,2):
+        DMAC+=dsmac[i:i+2]+':'
+        SMAC+=scmac[i:i+2]+':'
+
+print 'Destination MAC address',DMAC
+print 'source MAC addess',SMAC
+
+
+
+#print 'Destination MAC address:',binascii.hexlify(ethr[0])
+#print 'Source MAC address:',binascii.hexlify(ethr[1])
 
 print 'IP Header Packet Analysis!!!!'
 ip_hdr=struct.unpack('!12s4s4s',ipHdr)
