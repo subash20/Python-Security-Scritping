@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+
+import sys
+from scapy.all import *
+
+def banner():
+        print "#########################"
+        print "SSID finder "
+        print "#########################"
+
+ssid=set()
+def printer(pkt):
+        if pkt.haslayer(Dot11Beacon):
+                temp=pkt
+                while temp:
+                        temp=temp.getlayer(Dot11Elt)
+                        if temp and temp.ID==0 and (temp.info not in ssid):
+                                ssid.add(temp.info)
+                                print len(ssid),pkt.addr3,temp.info
+                        temp=temp.payload  # Goes to next step
+
+banner()
+sniff(iface=sys.argv[1],count=int(sys.argv[2]),prn=printer)
+
+                                          
