@@ -10,7 +10,7 @@ def banner():
 	print "     WiFI Packet Parser     "
 	print	"##############################"
 
-
+# This is parser packet
 def parser():
 	count=1
 	html=open(sys.argv[1],'r').read()
